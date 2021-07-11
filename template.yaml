@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  alexa-messenger
+
+  Sample SAM Template for alexa-messenger
+
+Parameters:
+  AlexaSkillId:
+    Type: String
+  LineChannelAccessToken:
+    Type: String
+  LineGroupId:
+    Type: String
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  MessengerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Events:
+        AlexaEventTrigger:
+          Type: AlexaSkill
+          Properties:
+            SkillId: !Ref AlexaSkillId
+      CodeUri: messenger/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Environment:
+        Variables:
+          ALEXA_SKILL_ID: !Ref AlexaSkillId
+          LINE_CHANNEL_ACCESS_TOKEN: !Ref LineChannelAccessToken
+          LINE_GROUP_ID: !Ref LineGroupId
