@@ -1,17 +1,21 @@
 # alexa-messenger
 
 Alexaスキルを使用してLINEにメッセージを送信するためのLambda関数です。
+
 AlexaスキルのエンドポイントにLambdaのARNを設定することで呼び出しています。
+
+AWSのSAMをコマンドラインで操作してbuildやdeployを行います。
 
 ## Set profile
 
 ```
-$ aws configure --profile alexa 
+$ aws configure --profile {YOUR_PROFILE} 
 ```
 
 ## Environment variables
 
 direnvの使用を推奨します。
+
 SAMでLambdaに環境変数を渡すために `--parameter-overrides` オプションを使用します。
 
 ```
@@ -29,10 +33,9 @@ $ sam build
 ## Deploy
 
 ```
-$ sam deploy --profile alexa \
+$ sam deploy --profile {YOUR_PROFILE} \
   --parameter-overrides \
     AlexaSkillId=$ALEXA_SKILL_ID \
     LineChannelAccessToken=$LINE_CHANNEL_ACCESS_TOKEN \
     LineGroupId=$LINE_GROUP_ID
 ```
-
